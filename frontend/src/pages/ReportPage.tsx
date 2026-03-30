@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ChevronLeft, AlertTriangle, CheckCircle } from 'lucide-react';
+const API = import.meta.env.VITE_API_URL;
 
 interface Report {
   _id: string;
@@ -29,7 +30,7 @@ export default function ReportPage() {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/sessions/report/${id}`);
+        const res = await axios.get(`${API}/api/sessions/report/${id}`);
         setReport(res.data);
       } catch {
         setError('Could not fetch report.');

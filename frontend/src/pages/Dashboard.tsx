@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PencilLine, FileText, LogOut, Trash2, Plus } from 'lucide-react';
 import Editor from '../components/Editor';
+const API = import.meta.env.VITE_API_URL;
 
 interface Session {
   _id: string;
@@ -25,7 +26,7 @@ export default function Dashboard() {
   const fetchSessions = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/sessions', {
+      const res = await axios.get(`${API}/api/sessions`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSessions(res.data);
@@ -42,7 +43,7 @@ export default function Dashboard() {
   const handleDelete = async (id: string) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/sessions/${id}`, {
+      await axios.delete(`${API}/api/sessions/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setConfirmDeleteId(null);

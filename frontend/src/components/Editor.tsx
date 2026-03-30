@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { Save, X, AlertTriangle, Clock } from 'lucide-react';
+import { API } from "../api";
 
 interface EditorProps {
   onCancel: () => void;
@@ -99,11 +100,11 @@ export default function Editor({ onCancel, onSave, initialSession }: EditorProps
       const token = localStorage.getItem('token');
       const payload = { content, delays, pasteEvents, editCount, navCount, sessionDuration };
       if (initialSession) {
-        await axios.put(`http://localhost:5000/api/sessions/${initialSession._id}`, payload, {
+        await axios.put(`${API}/api/sessions/${initialSession._id}`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.post('http://localhost:5000/api/sessions', payload, {
+        await axios.post(`${API}/api/sessions`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }

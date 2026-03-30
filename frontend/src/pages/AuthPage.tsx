@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+const API = import.meta.env.VITE_API_URL;
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,7 +15,7 @@ export default function AuthPage() {
     setLoading(true);
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const res = await axios.post(`http://localhost:5000${endpoint}`, { email, password });
+      const res = await axios.post(`${API}${endpoint}`, { email, password });
       localStorage.setItem('token', res.data.token);
       window.location.href = '/';
     } catch {
