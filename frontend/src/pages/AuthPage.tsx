@@ -15,8 +15,7 @@ export default function AuthPage() {
     setLoading(true);
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const res = await axios.post(`${API}${endpoint}`, { email, password });
-      localStorage.setItem('token', res.data.token);
+      const res = await axios.post(`${API}${endpoint}`, { email, password });      localStorage.setItem('token', res.data.token);
       window.location.href = '/';
     } catch {
       setError(isLogin ? 'Invalid credentials. Please try again.' : 'Registration failed. Account may already exist.');
